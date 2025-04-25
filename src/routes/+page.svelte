@@ -12,7 +12,9 @@
 
 	$effect(() => {
 		const savedTodos = localStorage.getItem('todos');
-		savedTodos && (todos = JSON.parse(savedTodos));
+		if (savedTodos) {
+			todos = JSON.parse(savedTodos);
+		}
 	});
 
 	$effect(() => {
@@ -62,7 +64,7 @@
 </script>
 
 <svelte:head>
-    <title>Todo App</title> 
+	<title>Todo App</title>
 </svelte:head>
 
 <div class="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center px-4 py-8">
@@ -74,7 +76,7 @@
 				type="text"
 				bind:value={newTodo}
 				placeholder="Add a new todo"
-				class="flex-grow rounded border p-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
+				class="flex-grow rounded border p-2 focus:ring-2 focus:ring-orange-300 focus:outline-none"
 			/>
 			<button
 				type="submit"
@@ -99,7 +101,7 @@
 
 		{#if todos.length > 0}
 			<ul class="mb-6 w-full divide-y rounded border">
-				{#each todos as todo, i}
+				{#each todos as todo, i (i)}
 					<li
 						class="flex items-center gap-3 p-3 first-of-type:rounded-t last-of-type:rounded-b hover:bg-gray-100"
 					>

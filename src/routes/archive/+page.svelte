@@ -11,7 +11,9 @@
 
 	$effect(() => {
 		const savedTodos = localStorage.getItem('archivedTodos');
-		savedTodos && (archivedTodos = JSON.parse(savedTodos));
+		if (savedTodos) {
+			archivedTodos = JSON.parse(savedTodos);
+		}
 	});
 
 	$effect(() => {
@@ -28,7 +30,7 @@
 </script>
 
 <svelte:head>
-    <title>Archive</title> 
+	<title>Archive</title>
 </svelte:head>
 
 <div class="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center px-4 py-8">
@@ -37,7 +39,7 @@
 	<div class="w-full">
 		{#if archivedTodos.length > 0}
 			<ul class="mb-6 w-full divide-y rounded border">
-				{#each archivedTodos as todo, i}
+				{#each archivedTodos as todo, i (i)}
 					<li class="flex items-center gap-3 p-3">
 						<span class="text-gray-500 line-through">{todo.text}</span>
 					</li>
