@@ -11,6 +11,9 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,7 +23,6 @@ jobs:
       - run: npm run build
         env: 
           BASE_PATH: '/${{ github.event.repository.name }}'
-      - run: npx playwright install --with-deps
       - run: npm run test:e2e
       - if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
