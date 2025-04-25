@@ -1,7 +1,7 @@
-name: Test pushed code
+name: Test PRs
 
 on:
-  push
+  pull_request
 
 jobs:
   build-and-test:
