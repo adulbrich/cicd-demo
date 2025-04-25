@@ -7,10 +7,9 @@ pre-push:
   jobs:
     - run: npm run build
     - run: npm test:e2e
-    
+
 pre-commit:
   parallel: true
   jobs:
     - run: npm run format
     - run: npm run lint
-
