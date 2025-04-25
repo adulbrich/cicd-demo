@@ -1,6 +1,7 @@
 name: Build and test
 
 on: 
+  workflow_dispatch:
   workflow_call:
     inputs:
       upload-pages-artifact:
@@ -17,6 +18,8 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm run build
+        env: 
+          BASE_PATH: '/${{ github.event.repository.name }}'
       - run: npx playwright install --with-deps
       - run: npm run test:e2e
       - if: ${{ !cancelled() }}
